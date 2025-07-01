@@ -31,7 +31,7 @@ router.delete('/:id',(req,res)=>{
                 })
 });
 
-router.postgit('/purchase/:id',(req,res)=>{
+router.post('/purchase/:id',(req,res)=>{
     const {id} = req.params;
     console.log(id)
     
