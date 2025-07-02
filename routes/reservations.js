@@ -4,7 +4,7 @@ const Reservation = require('../models/reservations')
 
 
 router.get('/recup',(req,res)=>{
-    Reservation.find()
+    Reservation.find({purchase: false})
                 .populate('trip')
                 .then(data => {
                     console.log(data);
@@ -41,8 +41,7 @@ router.delete('/:id',(req,res)=>{
                 })
 });
 
-router.get('/purchase',(req,res)=>{
-    
+router.put('/purchase',(req,res)=>{
     Reservation.updateMany({},{purchase: true})
                 .then(data=>{
                     console.log(data);
