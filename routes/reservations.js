@@ -3,8 +3,9 @@ const router = express.Router();
 const Reservation = require('../models/reservations')
 
 
-router.get('/recup',(req,res)=>{
-    Reservation.find({purchase: false})
+router.get('/recup/:bool',(req,res)=>{
+    const { bool } = req.params;
+    Reservation.find({purchase: bool})
                 .populate('trip')
                 .then(data => {
                     console.log(data);
