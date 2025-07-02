@@ -13,7 +13,6 @@ router.post('/', (req, res) => {
     let startDate = new Date(`${date}T00:00:00Z`)           
     let endDate = new Date(`${date}T23:59:59Z`)
 
-
     // Pour chaque objet du tablo, comparer date avec celle du body, si celle du body comrpise dans date de chaque élément, alors afficher l'élement 
 
     Trip.find({
