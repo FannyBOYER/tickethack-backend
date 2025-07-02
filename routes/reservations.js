@@ -3,12 +3,22 @@ const router = express.Router();
 const Reservation = require('../models/reservations')
 
 
-router.get('/:id',(req,res)=>{
+router.get('/recup',(req,res)=>{
+    Reservation.find()
+                .populate('trip')
+                .then(data => {
+                    console.log(data);
+                    res.json({result: true , recup: data})
+                })
+})
+
+
+router.get('/add/:id',(req,res)=>{
     const {id} = req.params;
     const newReservation = new Reservation({
         date: new Date(),
         purchase: false,
-        idTrip: id
+        trip: id
     })
     console.log(id)
 
@@ -31,14 +41,9 @@ router.delete('/:id',(req,res)=>{
                 })
 });
 
-router.post('/purchase/:id',(req,res)=>{
-    const {id} = req.params;
-    console.log(id)
+router.get('/purchase',(req,res)=>{
     
-    
-
-
-    Reservation.updateMany({_id: id})
+    Reservation.updateMany({},{purchase: true})
                 .then(data=>{
                     console.log(data);
                     res.json({result: true , update: data});
